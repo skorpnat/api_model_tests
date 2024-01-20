@@ -15,7 +15,8 @@ public class UserSpecs {
             .filter(withCustomTemplates())
             .log().all()
             .contentType(ContentType.JSON)
-            .baseUri("https://reqres.in/api/users/");
+            .baseUri("https://reqres.in")
+            .basePath("/api/users/");
 
     public static ResponseSpecification successfulResponse = new ResponseSpecBuilder()
             .expectStatusCode(200)
