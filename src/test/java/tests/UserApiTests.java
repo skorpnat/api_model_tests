@@ -1,8 +1,5 @@
 package tests;
 
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
-import io.restassured.specification.ResponseSpecification;
 import models.Response;
 import models.UserSingleBodyPostModel;
 import models.UserSinglePostResponseModel;
@@ -75,7 +72,7 @@ public class UserApiTests {
         singleUserBody.setJob("leader");
 
         UserSinglePostResponseModel response = step("POST запрос для создания нового пользователя", () ->
-                given().spec(userRequestSpec)
+                given(userRequestSpec)
                         .body(singleUserBody)
                         .when()
                         .post("")
@@ -83,7 +80,7 @@ public class UserApiTests {
                         .spec(createdResponse)
                         .extract().as(UserSinglePostResponseModel.class));
 
-        step("Проверка параметром созданного успешно пользователя", () -> {
+        step("Проверка параметров созданного успешно пользователя", () -> {
             assertThat(response.getName()).isEqualTo("morpheus");
             assertThat(response.getJob()).isEqualTo("leader");
             assertThat(response.getId()).isNotNull();
